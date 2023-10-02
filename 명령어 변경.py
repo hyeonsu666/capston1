@@ -35,4 +35,4 @@ def obfuscate_instruction(ea):
 if __name__ == "__main__":
     obfuscate_functions()
 
-#명령어 변경
+#명령어 변경ㄴㄴㄴㄴ
