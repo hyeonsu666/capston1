@@ -1,18 +1,13 @@
-import idautils
-import idaapi
-
 def extract_instructions():
-    # 모든 함수를 순회하며 명령어를 추출
-    for func_ea in idautils.Functions():
-        func = idaapi.get_func(func_ea)
-        if func is not None:
-            print(f"Function: {idaapi.get_func_name(func_ea)}")
-            
-            # 함수 내의 모든 기본 블록을 순회하며 명령어를 추출
-            for block in idaapi.FlowChart(func):
-                for insn in idautils.FuncItems(block.startEA):
-                    # 명령어 주소와 명령어 텍스트 출력
-                    print(f"Address: 0x{insn:X}, Instruction: {idc.GetDisasm(insn)}")
+    # 분석할 바이너리 파일의 주소를 설정
+    binary_path = "C:/path/to/your/binary.exe"
+
+    with open(binary_path, "rb") as file:
+        binary_data = file.read()
+
+    # IDA Pro와 독립적인 Python 스크립트로 어셈블리 명령어를 추출하는 로직을 작성
+    # 이 부분은 IDA Pro 환경과는 관련이 없으며, 원하는 바이너리 파일에 대한 처리입니다.
+    # 바이너리 데이터를 분석하고 어셈블리 명령어를 추출하는 로직을 여기에 작성하세요.
 
 if __name__ == "__main__":
     extract_instructions()
