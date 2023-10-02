@@ -1,6 +1,6 @@
 def extract_instructions():
     # 분석할 바이너리 파일의 주소를 설정
-    binary_path = "C:/path/to/your/binary.exe"
+    binary_path = "C:\Users\코코아 프렌즈\Documents\GitHub\capstone1\HelloWorld.exe"
 
     with open(binary_path, "rb") as file:
         binary_data = file.read()
