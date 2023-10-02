@@ -34,6 +34,6 @@ def obfuscate_instruction(instruction):
 #    obfuscate_instructions(binary_path)
 
     # 난독화된 바이너리 파일을 실행
-#    obfuscated_binary_path = binary_path.replace(".exe", "_obfuscated.exe")
-#    subprocess.run([obfuscated_binary_path])
+    obfuscated_binary_path = binary_path.replace(".exe", "_obfuscated.exe")
+    subprocess.run([obfuscated_binary_path])
 
