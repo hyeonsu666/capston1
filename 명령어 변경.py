@@ -34,3 +34,5 @@ def obfuscate_instruction(ea):
 # 스크립트 실행
 if __name__ == "__main__":
     obfuscate_functions()
+
+#명령어 변경
