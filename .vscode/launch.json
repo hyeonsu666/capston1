@@ -10,7 +10,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/user1/Documents/capstone1",
-      "program": "c:/Users/user1/Documents/GitHub/capstone1/build/Debug/outDebug",
+      "program": "c:/Users/user1/Documents/capstone1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -19,8 +19,7 @@
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }
-      ],
-      "preLaunchTask": "build",
+      ]
     }
   ]
 }

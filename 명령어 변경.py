@@ -1,39 +1,40 @@
-import lief
-import random
-import subprocess
+# 난독화할 대상 명령 확인
+def is_instruction_to_obfuscate(mnemonic):
+    return mnemonic in ["add", "sub", "xor", "mov"]
 
-def obfuscate_instructions(binary_path):
-    # 바이너리 파일 열기
-    binary = lief.parse(binary_path)
-    
-    # 난독화할 대상 명령어 목록
-    instructions_to_obfuscate = ["add", "sub", "xor", "mov"]
-    
-    for function in binary.functions:
-        for basic_block in function.basic_blocks:
-            for instruction in basic_block.instructions:
-                # 명령어가 난독화 대상에 포함되어 있는지 확인
-                if instruction.mnemonic in instructions_to_obfuscate:
-                    obfuscate_instruction(instruction)
-
-    # 난독화된 바이너리 파일 저장
-    obfuscated_binary_path = binary_path.replace(".exe", "_obfuscated.exe")
-    binary.write(obfuscated_binary_path)
-
+# 명령 난독화
 def obfuscate_instruction(instruction):
-    # 예제: 난독화된 명령어로 대체
-    # 여기에서는 두 피연산자의 값을 더하는 난독화를 예로 들었습니다.
-    operand1 = instruction.operands[0]
-    operand2 = instruction.operands[1]
-    new_value = operand1.value + operand2.value
-    operand1.value = new_value
-    operand2.value = 0
+    if len(instruction) >= 2:
+        operand1 = instruction[0]
+        operand2 = instruction[1]
+        new_operand1 = operand1 + operand2  # 예: 두 피연산자의 합
+        return f"mov {operand1}, {new_operand1}"  # 난독화된 명령 반환
+    return None
 
-#if __name__ == "__main__":
-#    binary_path = "C:\Users\코코아 프렌즈\Documents\GitHub\capstone1\HelloWorld(1).exe"  # 분석할 바이너리 파일 경로 설정
-#    obfuscate_instructions(binary_path)
+# 난독화할 함수 내용
+def obfuscate_function(function):
+    obfuscated_code = []
+    for instruction in function:
+        mnemonic = instruction[0]
+        if is_instruction_to_obfuscate(mnemonic):
+            obfuscated = obfuscate_instruction(instruction)
+            if obfuscated:
+                obfuscated_code.append(obfuscated)
+        else:
+            obfuscated_code.append(' '.join(instruction))
+    return obfuscated_code
 
-    # 난독화된 바이너리 파일을 실행
-    obfuscated_binary_path = binary_path.replace(".exe", "_obfuscated.exe")
-    subprocess.run([obfuscated_binary_path])
+# 스크립트 실행
+if __name__ == "__main__":
+    # 테스트용 함수 내용
+    sample_function = [
+        ["mov", "eax", "10"],
+        ["add", "eax", "20"],
+        ["mov", "ebx", "30"],
+        ["sub", "ebx", "5"],
+    ]
 
+    obfuscated_code = obfuscate_function(sample_function)
+
+    for line in obfuscated_code:
+        print(line)
